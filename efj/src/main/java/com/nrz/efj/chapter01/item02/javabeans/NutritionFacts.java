@@ -1,7 +1,9 @@
 package com.nrz.efj.chapter01.item02.javabeans;
 
+import java.io.Serializable;
+
 // 자바빈즈 패턴은 일관성이 깨지고, 불변으로 만들 수 없다.
-public class NutritionFacts {
+public class NutritionFacts implements Serializable {
     // 필드 (기본값이 있다면) 기본값으로 초기화된다.
     private int servingSize  = -1; // 필수; 기본값 없음
     private int servings     = -1; // 필수; 기본값 없음
