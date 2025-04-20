@@ -1,6 +1,6 @@
 package com.nrz.efj.chapter01.item03.staticfactory;
 
-public class Elvis {
+public class Elvis implements Singer{
     private static final Elvis INSTANCE = new Elvis();
     private Elvis(){}
     public static Elvis getInstance(){return INSTANCE;}
@@ -15,5 +15,10 @@ public class Elvis {
 
         System.out.println(Elvis.getInstance());
         System.out.println(Elvis.getInstance());
+    }
+
+    @Override
+    public void sing() {
+        System.out.println("my way~~~");
     }
 }
