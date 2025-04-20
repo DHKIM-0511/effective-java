@@ -32,6 +32,7 @@ public class Elvis implements IElvis, Serializable {
         elvis.leaveTheBuilding();
     }
 
+    //역직렬화시에 사용되는 메서드
     private Object readResolve() {
         return INSTANCE;
     }
