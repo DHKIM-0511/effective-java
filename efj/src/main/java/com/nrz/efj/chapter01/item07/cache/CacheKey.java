@@ -2,6 +2,9 @@ package com.nrz.efj.chapter01.item07.cache;
 
 import java.time.LocalDateTime;
 
+/*
+* WeakReference 객체를 안쓰고 Integer같은 Wrapper 클래스를 쓰면 gc가 안없앰(내부적으로 캐싱)
+* */
 public class CacheKey {
     private Integer value;
 

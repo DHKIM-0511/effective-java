@@ -26,7 +26,5 @@ class ChatRoomTest {
 
         List<WeakReference<User>> users = room.getUsers();
         assertNotEquals(1, users.size());
-
-
     }
 }
