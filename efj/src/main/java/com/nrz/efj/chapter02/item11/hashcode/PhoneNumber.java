@@ -29,12 +29,39 @@ public final class PhoneNumber {
                 && pn.areaCode == areaCode;
     }
 
-    @Override
-    public int hashCode() {
-        return 42;
+//    @Override
+//    public int hashCode() {
+//        return 42;
+//    }
+
+    // hashCode 없이는 제대로 동작하지 않는다. 다음 셋 중 하나를 활성화하자.
+
+    // 코드 11-2 전형적인 hashCode 메서드 (70쪽)
+//    @Override public int hashCode() {
+//        int result = Short.hashCode(areaCode); // 1
+//        result = 31 * result + Short.hashCode(prefix); // 2
+//        result = 31 * result + Short.hashCode(lineNum); // 3
+//        return result;
+//    }
+
+    // 코드 11-3 한 줄짜리 hashCode 메서드 - 성능이 살짝 아쉽다. (71쪽)
+//    @Override public int hashCode() {
+//        return Objects.hash(lineNum, prefix, areaCode);
+//    }
+
+    // 해시코드를 지연 초기화하는 hashCode 메서드 - 스레드 안정성까지 고려해야 한다. (71쪽)
+    private int hashCode; // 자동으로 0으로 초기화된다.
+
+    @Override public int hashCode() {
+        int result = hashCode;
+        if(result == 0){
+            result = Short.hashCode(areaCode);
+            result = 31 * result + Short.hashCode(prefix);
+            result = 31 * result + Short.hashCode(lineNum);
+            hashCode = result;
+        }
+        return result;
     }
-
-
 
     public static void main(String[] args) {
         Map<PhoneNumber, String> m = new HashMap<>();
