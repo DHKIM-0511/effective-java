@@ -1,0 +1,5 @@
+package com.nrz.efj.chapter03.class_and_interfaces.member;
+
+public class Member {
+
+}
