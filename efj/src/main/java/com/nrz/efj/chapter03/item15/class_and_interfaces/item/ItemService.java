@@ -1,6 +1,6 @@
-package com.nrz.efj.chapter03.class_and_interfaces.item;
+package com.nrz.efj.chapter03.item15.class_and_interfaces.item;
 
-import com.nrz.efj.chapter03.class_and_interfaces.member.MemberService;
+import com.nrz.efj.chapter03.item15.class_and_interfaces.member.MemberService;
 
 public class ItemService {
 
