@@ -1,4 +1,4 @@
-package com.nrz.efj.chapter03.item17;
+package com.nrz.efj.chapter03.item17.immutable_object;
 
 public final class PhoneNumber {
     public final short areaCode, prefix, lineNum;
