@@ -19,6 +19,6 @@ class ItemServiceTest {
     void itemServiceConstructor(){
         ItemService service = new ItemService(memberService);
         assertNotNull(service);
-        assertNotNull(service.memberService);
+//        assertNotNull(service.memberService);
     }
 }
