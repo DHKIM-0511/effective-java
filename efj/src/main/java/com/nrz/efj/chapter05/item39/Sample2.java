@@ -24,7 +24,7 @@ public class Sample2 {
     @ExceptionTest(ArithmeticException.class)
     public static void m3(){}
 
-    @ExceptionTest({IndexOutOfBoundsException.class, NullPointerException.class})
+    @ExceptionTest3({IndexOutOfBoundsException.class, NullPointerException.class})
     public static void doublyBad(){
         List<String> list = new ArrayList<>();
         list.addAll(5, null);
