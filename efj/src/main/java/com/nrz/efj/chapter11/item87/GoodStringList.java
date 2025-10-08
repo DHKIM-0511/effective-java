@@ -1,0 +1,56 @@
+package com.nrz.efj.chapter11.item87;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+/**
+ * transient: 직렬화에서 제외할 필드를 정하는 한정자
+ * ObjectOutputStream 등을 통해 파일로 저장하거나 네트워크로 전송할 때 해당 필드의 값이 기록되지 않는다.
+ * 모든 필드가 transient 라고 하더라도, writeObject 와 readObject 는 각각 가장 먼저 defaultWriteObject(), defaultReadObject()를 호출해야한다.
+ * 직렬화 명세에서는 해당 작업을 무조건 하라고 요구한다.
+ *
+ * 향후 릴리스에서 transient가 아닌 인스턴스 필드가 추가되더라도 상호(상위와 하위 모두)호환되기 때문이다.
+ * 신버전 인스턴스를 직렬화한 후 구버전으로 역직렬화하면 새로 추가된 필드들은 무시될것이다.
+ * 구버전에서 defaultReadObject()를 호출하지 않는다면 역직렬화 시 StreamCorruptedException이 발생할것이다.
+ */
+public final class GoodStringList implements Serializable {
+    private transient int size = 0;
+    private transient Entry head = null;
+
+    private static class Entry{
+        String data;
+        Entry next;
+        Entry previous;
+    }
+
+    //지정한 문자열을 이 리스트에 추가한다
+    public final void add(String s){}
+
+    /**
+     * 이 {@code GoodStringList} 인스턴스를 직렬화한다.
+     *
+     * @serialData 이 리스트의 크기 (포함된 문자열의 개수)를 기록한 후
+     * ({@code int}), 이어서 모든 원소를 (각각은 {@code String}) 순서대로 기록한다.
+     */
+    private void writeObject(ObjectOutputStream s)throws IOException {
+        s.defaultWriteObject();
+        s.writeInt(size);
+
+        //모든 원소를 올바른 순서로 기록한다.
+        for(Entry e = head; e != null ; e = e.next){
+            s.writeObject(e.data);
+        }
+    }
+
+    private void readObject(ObjectInputStream s)throws IOException, ClassNotFoundException{
+        s.defaultReadObject();
+        int numElements = s.readInt();
+
+        //모든 원소를 읽어 이 리스트에 삽입한다.
+        for(int i = 0 ; i < numElements ; i++) add((String) s. readObject());
+    }
+
+    //... 나머지 코드 생략
+}
